@@ -1,0 +1,35 @@
+directive @fake(
+    fake: String,
+    probability: Float = 0,
+) on FIELD_DEFINITION
+
+directive @fake_list(
+    min: Int
+    max: Int
+    p_add: Float
+    p_delete: Float
+) on FIELD_DEFINITION
+
+type Section {
+    heading: String         @fake(fake: "this.lorem.slug()", probability: 0.05)
+    duration: Int           @fake(fake: "this.random.number({min:10, max:30*60})", probability: 0.25)
+}
+
+type Course {
+    title: String           @fake(fake: "this.lorem.words()")
+    author: String          @fake(fake: "this.name.findName()")
+    description: String     @fake(fake: "this.lorem.sentences()")
+    url: String             @fake(fake: "this.internet.url()", probability: 0.1)
+    sections: [Section]     @fake_list(min: 3, max: 7, p_add: 0.2, p_delete: 0.2)
+    length: Int             @fake(fake: "this.random.number(100)", probability: 0.5)
+}
+
+type Query {
+    courses: [Course]       @fake_list(min: 3, max: 5, p_add: 0.1, p_delete: 0.1)
+    sections: [Section]     @fake_list(min: 3, max: 5, p_add: 0.1, p_delete: 0.1)
+}
+
+type Subscription {
+    courseAdded: Course
+}
+
