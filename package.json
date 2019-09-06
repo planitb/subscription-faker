@@ -1,5 +1,5 @@
 {
-  "name": "apollo-faker",
+  "name": "subscription-faker",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "apollo-server": "^2.9.0",
     "chokidar": "^3.0.2",

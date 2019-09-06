@@ -16,19 +16,32 @@ npm install subscription-faker
 If installed with the optional `-g` flag the server can be started using the `subscription-faker` command. If installed locally (without the `-g` flag) it will need to be started using `npx subscription-faker`.
 
 ### Command Line Options
-TBD
+
+```
+Usage: main [options]
+
+Options:
+  -V, --version          output the version number
+  -s, --schema <file>    Annotated GraphQL schema file (default: "schema.graphql")
+  -h, --host <hostname>  Hostname or IP address to run server under (default: "localhost")
+  -p, --port <number>    port number to run the server under (default: 4000)
+  -u, --pathname <path>  The server pathname (default: "/graphql")
+  -c, --period <period>  The update cycle period (in seconds) for subscriptions (default: 1)
+  -v, --verbose          Echo generated data to stdout (default: false)
+  -h, --help             output usage information
+```
 
 ### The `@fake()` schema directive
 ```graphql
 directive @fake(
-    fake: String,					# a JavaScript expression
-    probability: Float = 0,			# 0.0 => never morphs, 1.0 => always morphs
+    fake: String,                   # a JavaScript expression
+    probability: Float = 0,         # 0.0 => never morphs, 1.0 => always morphs
 ) on FIELD_DEFINITION
 ```
 
 The `@fake()` directive can be meaningfully applied to any scalar GraphQL field. The `fake` property of the directive should be a valid JavaScript expression; this will be evaluated and the resultant value assigned to the given datum. Within the expression, `this` references an instance of `faker`, see [https://www.npmjs.com/package/faker](https://www.npmjs.com/package/faker) for details of the `faker` API. See also the examples below. If no `@fake()` is associated with a scalar, the default value from the Apollo GraphQL server will be used (see [https://www.apollographql.com/docs/apollo-server/features/mocking/](https://www.apollographql.com/docs/apollo-server/features/mocking/) for more details).
 
-The optional `@fake()``probability` controls how the data changes if that field is returned by a GraphQL subscription. It should range from 0 (the data never changes - the default) to 1 (the data changes every subscription cycle). If the `probability` is set to 0.5, then on each subscription cycle there is a 50% probability that the data will be updated. The new, fake, data is regenerated using the original `fake` expression.
+The optional `@fake()` `probability` controls how the data changes if that field is returned by a GraphQL subscription. It should range from 0 (the data never changes - the default) to 1 (the data changes every subscription cycle). If the `probability` is set to 0.5, then on each subscription cycle there is a 50% probability that the data will be updated. The new, fake, data is regenerated using the original `fake` expression.
 
 ### The `@fake_list()` schema directive
 ```graphql
