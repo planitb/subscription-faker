@@ -2,6 +2,10 @@ import {ListDeleteElementMorph, Morph} from "../src/Morphs";
 
 describe('ListDeleteElementMorph', () => {
 
+    beforeEach(() => {
+        Morph.reset();
+    });
+
     it("should be creatable", () => {
         expect(new ListDeleteElementMorph(1, "test", "$", 3)).toBeTruthy();
     });

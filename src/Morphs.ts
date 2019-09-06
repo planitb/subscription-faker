@@ -47,6 +47,10 @@ export abstract class Morph {
     public static hasMorph(name: string) {
         return Morph.MorphsByName.has(name);
     }
+
+    public static reset() {
+        this.MorphsByName.clear();
+    }
 }
 
 

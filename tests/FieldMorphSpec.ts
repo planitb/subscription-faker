@@ -3,11 +3,15 @@ import {MorphScalar, Morph} from "../src/Morphs";
 
 describe("FieldMorphSpec", () => {
 
+    beforeEach(() => {
+        Morph.reset();
+    });
+
     it("can be created", () => {
         expect(new MorphScalar(0.5, "test", "$.foo.bar", (o) => Promise.resolve()));
     });
 
-    it("can update top level fields", () => {
+    it("can update top level fields", async (done) => {
         const m = new MorphScalar(1, "test", "$", (o) => {
             o["data"]++;
             return Promise.resolve();
@@ -16,11 +20,12 @@ describe("FieldMorphSpec", () => {
             data: 10
         };
 
-        Morph.cycle(o);
+        await Morph.cycle(o);
         expect(o).toEqual({data: 11});
+        done();
     });
 
-    it("can update nested fields", () => {
+    it("can update nested fields", async (done) => {
         const m = new MorphScalar(1, "test", "$.nested", (o) => {
             o["data"]++;
             return Promise.resolve();
@@ -29,11 +34,12 @@ describe("FieldMorphSpec", () => {
             nested: {data: 10}
         };
 
-        Morph.cycle(o);
+        await Morph.cycle(o);
         expect(o).toEqual({nested: {data: 11}});
+        done()
     });
 
-    it("can update fields embedded in arrays", () => {
+    it("can update fields embedded in arrays", async (done) => {
         const m = new MorphScalar(1, "test", "$.nested[*]", (o) => {
             o["data"]++;
             return Promise.resolve();
@@ -42,11 +48,12 @@ describe("FieldMorphSpec", () => {
             nested: [{data: 10}]
         };
 
-        Morph.cycle(o);
+        await Morph.cycle(o);
         expect(o).toEqual({nested: [{data: 11}]});
+        done();
     });
 
-    it("is benign if applied to non-matching data", () => {
+    it("is benign if applied to non-matching data", async (done) => {
         const m = new MorphScalar(1, "test", "$.nested[*]", (o) => {
             o["data"]++;
             return Promise.resolve();
@@ -55,11 +62,12 @@ describe("FieldMorphSpec", () => {
             foo: [{bar: 10}]
         };
 
-        Morph.cycle(o);
+        await Morph.cycle(o);
         expect(o).toEqual({foo: [{bar: 10}]});
+        done();
     });
 
-    it("its threshold reflects how often it is applied ... maybe never", () => {
+    it("its threshold reflects how often it is applied ... maybe never", async (done) => {
         const m = new MorphScalar(0, "test", "$", (o) => {
             o["data"]++;
             return Promise.resolve();
@@ -69,10 +77,11 @@ describe("FieldMorphSpec", () => {
         };
 
         for(let n = 0; n < 100; n++) {
-            Morph.cycle(o);
+            await Morph.cycle(o);
         }
 
         expect(o).toEqual({data: 10});
+        done();
     });
 
     it("its threshold reflects how often it is applied", async (done) => {
@@ -85,8 +94,11 @@ describe("FieldMorphSpec", () => {
         };
 
         let r = false;
+        let callCount = 0;
+        const oldRandom = Math.random;
         spyOn(Math, "random").and.callFake(() => {
             r = !r;
+            callCount++;
             return r ? 1 : 0;
         });
 
@@ -94,11 +106,15 @@ describe("FieldMorphSpec", () => {
             await Morph.cycle(o);
         }
 
+        expect(callCount).toEqual(100);
         expect(o).toEqual({data: 50});
+
+        Math.random = oldRandom;
+
         done();
     });
 
-    it("can update multiple fields", () => {
+    it("can update multiple fields", async (done) => {
         const m = new MorphScalar(1, "test", "$.nested[*]", (o) => {
             o["bar"]++;
             return Promise.resolve();
@@ -107,7 +123,8 @@ describe("FieldMorphSpec", () => {
             nested: [{bar: 10}, {bar: 20}]
         };
 
-        Morph.cycle(o);
+        await Morph.cycle(o);
         expect(o).toEqual({nested: [{bar: 11}, {bar: 21}]});
+        done();
     });
 });

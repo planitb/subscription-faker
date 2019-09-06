@@ -3,6 +3,10 @@ import {ListAddElementMorph, Morph} from "../src/Morphs";
 
 describe("ListAddElementMorph", () => {
 
+    beforeEach(() => {
+        Morph.reset();
+    });
+
     it("should be creatable", () => {
         expect(new ListAddElementMorph(1, "foo", "$", 10, null)).toBeTruthy();
     });
