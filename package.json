@@ -11,6 +11,7 @@
   "bin": {
     "subscription-faker": "./src/main.js"
   },
+  "files": ["lib"],
   "keywords": [],
   "author": "",
   "license": "MIT",
