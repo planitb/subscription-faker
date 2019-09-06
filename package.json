@@ -1,6 +1,6 @@
 {
   "name": "subscription-faker",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "",
   "main": "src/main.js",
   "scripts": {
@@ -11,7 +11,9 @@
   "bin": {
     "subscription-faker": "./src/main.js"
   },
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "keywords": [],
   "author": "",
   "license": "MIT",
