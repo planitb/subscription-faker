@@ -5,9 +5,11 @@
     "lib": ["es2018"],
     "sourceMap": true,
     "esModuleInterop": true,
-    "strict": true
+    "strict": true,
+    "outDir": "../lib"
   },
   "exclude": [
     "../node_modules"
-  ]
+  ],
+  "include": ["."]
 }

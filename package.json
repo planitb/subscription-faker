@@ -2,9 +2,11 @@
   "name": "subscription-faker",
   "version": "1.0.4",
   "description": "",
-  "main": "index.js",
+  "main": "cli.js",
   "scripts": {
-    "test": "jasmine tests/*Spec.js"
+    "build": "tsc -P src",
+    "test": "jasmine tests/*Spec.js",
+    "prepare": "npm run build"
   },
   "bin": {
     "subscription-faker": "./cli.js"
@@ -13,8 +15,8 @@
   "author": "",
   "license": "MIT",
   "repository": {
-    "type": "GitHub",
-    "url": "https://github.com/planitb/subscription-faker.git"
+    "type": "git",
+    "url": "git@github.com:planitb/subscription-faker.git"
   },
   "dependencies": {
     "apollo-server": "^2.9.0",

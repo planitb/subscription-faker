@@ -2,6 +2,7 @@
 node_modules
 spec
 .idea
+lib
 
 src/**/*.js
 src/**/*.js.map
