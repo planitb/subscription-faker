@@ -1,0 +1,9 @@
+
+node_modules
+spec
+.idea
+
+src/**/*.js
+src/**/*.js.map
+tests/**/*.js
+tests/**/*.js.map
