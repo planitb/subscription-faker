@@ -166,7 +166,7 @@ async function fileChanged(fileName: string): Promise<boolean> {
 }
 
 
-async function main(options: SubscriptionFakerOptions) {
+export async function main(options: SubscriptionFakerOptions) {
     const {pathname, port, host, period, verbose} = options;
     let app: Express;
     let wsServer: WebSocket.Server;
