@@ -1,6 +1,6 @@
 {
   "name": "subscription-faker",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "A GraphQL server implementing 'faked' GraphQL queries, mutations and subscriptions",
   "main": "lib/cli.js",
   "scripts": {
