@@ -2,7 +2,7 @@
   "name": "subscription-faker",
   "version": "1.0.9",
   "description": "A GraphQL server implementing 'faked' GraphQL queries, mutations and subscriptions",
-  "main": "lib/main.js",
+  "main": "lib/cli.js",
   "scripts": {
     "build": "tsc -P src",
     "test": "jasmine tests/*Spec.js",
@@ -10,7 +10,7 @@
     "np": "np"
   },
   "bin": {
-    "subscription-faker": "./lib/main.js"
+    "subscription-faker": "./lib/cli.js"
   },
   "files": [
     "lib",

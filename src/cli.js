@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const main = require("./src/main").main;
+const main = require("./main").main;
 const program = require("commander");
 
 program
