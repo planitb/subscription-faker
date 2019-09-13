@@ -1,21 +1,23 @@
 {
   "name": "subscription-faker",
   "version": "1.0.7",
-  "description": "",
-  "main": "src/main.js",
+  "description": "A GraphQL server implementing 'faked' GraphQL queries, mutations and subscriptions",
+  "main": "lib/main.js",
   "scripts": {
     "build": "tsc -P src",
     "test": "jasmine tests/*Spec.js",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "np": "np"
   },
   "bin": {
-    "subscription-faker": "./src/main.js"
+    "subscription-faker": "./lib/main.js"
   },
   "files": [
-    "lib"
+    "lib",
+    "schema.graphql"
   ],
-  "keywords": [],
-  "author": "",
+  "keywords": ["graphql", "apollo", "subscriptions"],
+  "author": "planITb",
   "license": "MIT",
   "repository": {
     "type": "git",
