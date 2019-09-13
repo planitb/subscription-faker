@@ -4,7 +4,7 @@
   "description": "A GraphQL server implementing 'faked' GraphQL queries, mutations and subscriptions",
   "main": "lib/cli.js",
   "scripts": {
-    "build": "tsc -P src",
+    "build": "tsc -P src && cp src/cli.js lib/",
     "test": "jasmine tests/*Spec.js",
     "prepare": "npm run build",
     "np": "np"
