@@ -19,7 +19,9 @@
   "keywords": [
     "graphql",
     "apollo",
-    "subscriptions"
+    "subscriptions",
+    "faker",
+    "mocks"
   ],
   "author": "planITb",
   "license": "MIT",
